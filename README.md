@@ -1,0 +1,2 @@
+# Carcass-classification-of-cultured-salmon-at-British-Columbian-aquaculture-sites-by-facility
+This report provides a breakdown of salmon mortality by carcass category for each active facility. Sites used exclusively for smolt entry may have elevated mortality due to stresses associated with initial seawater entry. Similarly, elevated mortalities may occur if fish are stressed due to harvest activities.
