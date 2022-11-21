@@ -1,2 +1,4 @@
+# Mortality at salmon aquaculture facilities is closely monitored. As in any population of wild or farmed animals, there are a number of causes leading to death. While in-depth diagnostic testing takes time, carcasses are routinely assigned to a number of defined categories which can help facility operators and Fisheries and Oceans Canada staff quickly assess whether disease may be present. Facility operators report mortalities in a number of categories that describe either the cause of death or the condition of the carcass.
+
 # Carcass-classification-of-cultured-salmon-at-British-Columbian-aquaculture-sites-by-facility
 This report provides a breakdown of salmon mortality by carcass category for each active facility. Sites used exclusively for smolt entry may have elevated mortality due to stresses associated with initial seawater entry. Similarly, elevated mortalities may occur if fish are stressed due to harvest activities.
