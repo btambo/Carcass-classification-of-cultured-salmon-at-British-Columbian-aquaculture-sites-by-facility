@@ -6,41 +6,15 @@ import calendar
 
 df = pd.read_csv("Carcass_Classification_Salmon.csv")
 
-app = Dash(__name__, external_stylesheets=[dbc.themes.YETI])
-
-# the style arguments for the sidebar. We use position:fixed and a fixed width
-SIDEBAR_STYLE = {
-    "position": "fixed",
-    "top": 0,
-    "left": 0,
-    "bottom": 0,
-    "width": "30rem",
-    "padding": "2rem 1rem",
-    "background-color": "#f8f9fa",
-}
-
-# the styles for the main content position it to the right of the sidebar and
-# add some padding.
-CONTENT_STYLE = {
-    "margin-left": "18rem",
-    "margin-right": "2rem",
-    "padding": "2rem 1rem",
-}
-
-
-
-# Navigation Bar Component
-navbar = dbc.Navbar (
-    html.A(dbc.NavbarBrand("Carcass Classification of Aquaculture Salmon in BC"))
-)
+app = Dash(__name__, external_stylesheets=[dbc.themes.SLATE])
 
 # Licence Holder Dropdown Component
 licence_holders = df['Licence Holder'].unique()
 
 licence_dropdown = dcc.Dropdown(
-    options=licence_holders,
-    id = "select-licence-dropdown"
-)
+        options=licence_holders,
+        id = "select-licence-dropdown"
+    )
 
 # Year Slider Component
 year_minimum = df["Year"].min()
@@ -91,57 +65,40 @@ species_checklist = dcc.Checklist(species)
 production_info = {str(prod_info): str(prod_info) for prod_info in df['Production Information & Report Status'].unique()}
 production_info_checklist = dcc.Checklist(production_info)
 
-# Sidebar Component
+SIDEBAR_STYLE = {
+    "position": "fixed",
+    "top": 0,
+    "left": 0,
+    "bottom": 0,
+    "width": "25rem",
+    "padding": "2rem 1rem",
+    "background-color": "#f8f9fa",
+}
+
 sidebar = html.Div(
     [
-        html.H2("Sidebar", className="display-4"),
+        html.H2("Salmon Carcass Classification for Fish Farms in British Columbia"),
         html.Hr(),
-        html.P(
-            "A simple sidebar layout with navigation links", className="lead"
-        ),
-        dbc.Container(
-            [
-                licence_dropdown,
-                year_slider,
-                month_slider,
-                species_checklist,
-                production_info_checklist
-            ]
-        ),
+        html.H5("Licence Holder"),
+        licence_dropdown,
+        html.H5("Year"),
+        year_slider,
+        html.H5("Month"),
+        month_slider,
+        html.H5("Species"),
+        species_checklist,
+        html.H5("Production Information"),
+        production_info_checklist
+        
     ],
+    style=SIDEBAR_STYLE,
 )
 
-content = html.Div(id="page-content", style=CONTENT_STYLE)
 
 app.layout = dbc.Container([
-    html.H1("Carcass Classifications of Farmed Salmon in British Columbia"),
-    html.Hr(),
-    dbc.Row(
-        [
-            dbc.Col(sidebar),
-            dbc.Col(html.H1("test")),
-        ],
-        align="center",
-        ),
-    ],
-    fluid=True,
+    sidebar
+]
 )
-
-# app.layout = dbc.Container(
-#     children= [
-#     navbar,
-#     licence_dropdown,
-#     year_slider,
-#     month_slider,
-#     species_checklist,
-#     production_info_checklist
-#     ]
-# )
-
-
-
-
-
 
 @app.callback(
     Output('output-container-year-slider', 'children'),
