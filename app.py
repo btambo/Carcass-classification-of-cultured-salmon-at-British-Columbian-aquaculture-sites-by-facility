@@ -5,6 +5,8 @@ import plotly.graph_objects as go
 import pandas as pd
 import calendar
 
+from sympy import false
+
 df = pd.read_csv("Carcass_Classification_Salmon.csv")
 
 app = Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP])
@@ -158,14 +160,17 @@ def update_geo_chart(licence_holder, year, month):
         & (df['Month']>=month[0])
         & (df['Month']<=month[1])]
 
-    f_df = filtered_df.mean()
+    average_df = filtered_df.groupby('Site Common Name', as_index=False).mean()
+    print(average_df['Latitude'])
 
     fig = px.scatter_geo(
-        lon = filtered_df['Longitude'],
-        lat = filtered_df['Latitude'],
-        text = filtered_df['Site Common Name'],
-        size = filtered_df['Total Mortality (%/month)']
+        lon = average_df['Longitude'],
+        lat = average_df['Latitude'],
+        text = average_df['Site Common Name'],
+        color=average_df['Site Common Name'],
+        size = average_df['Total Mortality (%/month)'],
         )
+    fig.update_geos(fitbounds="locations", resolution=110)
     return fig
 
 
